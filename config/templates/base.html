@@ -10,8 +10,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Faghat Tarafdaran</title>
-    <meta name="description" content="Faghat Tarafdaran">
+    <title>Data and Caption Saver</title>
+    <meta name="description" content="Data and Caption Saver">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="apple-icon.png">
@@ -27,13 +27,14 @@
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
 </head>
 <body>
+    {% if request.user.is_authenticated %}
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div class="navbar-header">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <h3 class="menu-title">Faghat Tarafdaran</h3>
+                <h3 class="menu-title">Data and Caption Saver</h3>
             </div>
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -77,6 +78,7 @@
             </div>
         </nav>
     </aside>
+    {% endif %}
     <div id="right-panel" class="right-panel">
         <header id="header" class="header">
             <div class="header-menu">
