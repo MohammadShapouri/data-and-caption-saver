@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_content %}
+
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content">
+                <div class="login-form">
+                    <form method="post">
+                        <div class="form-group">
+                            <label>Name</label>
+                            {{form.name}}
+                            <!-- <input type="text" class="form-control" placeholder="Name"> -->
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            {{form.description}}
+                            <!-- <input type="text" class="form-control" placeholder="Description"> -->
+                        </div>
+                        <div class="form-group">
+                            <label>Album Picture</label>
+                            {{form.album_picture}}
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                Private Album
+                                {{form.is_private}}
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Create Album</button>
+                        {% csrf_token %}
+                    </form>
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

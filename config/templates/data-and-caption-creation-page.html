@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_content %}
+
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content">
+                <div class="login-form">
+                    <h4>You can add a file, a link  or both of them each time.</h4>
+                    <form method="post">
+                        <div class="form-group">
+                            <label>{{form.title.label}}</label>
+                            {{form.title}}
+                        </div>
+                        <div class="form-group">
+                            <label>{{form.file.label}}</label>
+                            {{form.file}}
+                        </div>
+                        <div class="form-group">
+                            <label>{{form.url.label}}</label>
+                            {{form.url}}
+                        </div>
+                        <div class="form-group">
+                            <label>{{form.owner_description.label}}</label>
+                            {{form.owner_description}}
+                        </div>
+                        <div class="form-group">
+                            <label>{{form.ai_based_description.label}}</label>
+                            {{form.ai_based_description}}
+                        </div>
+                        <div class="form-group">
+                            <label>{{form.album.label}}</label>
+                            {{form.album}}
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Add Data and Caption</button>
+                        {% csrf_token %}
+                    </form>
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

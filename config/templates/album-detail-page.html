@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_content %}
+        <div class="content mt-3">
+            <div class="animated fadeIn">
+                <div class="column">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa fa-user"></i><strong class="card-title pl-2">Album Detail</strong>
+                            </div>
+                            <div class="card-body">
+                                <div class="mx-auto d-block">
+                                    {% if object == None %}
+                                        <img class="mx-auto d-block" width="100px" src="{% static 'photos/album_photos/default/default_album_pic.png' %}" alt="Card image cap">
+                                        <h2 class="text-sm-center mt-2 mb-1">Nothing Found</h2>
+                                    {% else %}
+                                        <img class="mx-auto d-block" width="100px" src="{{object.album_picture.url}}" alt="Card image cap">
+                                        <h5 class="text-sm-center mt-2 mb-1">{{object.name}}</h5>
+                                        {% if object.owner.pk == request.user.pk %}
+                                        <hr>
+                                        <div class="card-text text-sm-center">
+                                            <a href="{% url 'update_album' object.pk %}"><i class="fa fa-edit pr-1"></i>Edit</a>
+                                            <a href="{% url 'delete_album' object.pk %}"><i class="fa fa-trash-o pr-1"></i>Delete</a>
+                                        </div>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Account Info</strong>
+                        </div>
+                        <div class="card-body">
+                            <h4>Owner's username: <span class="badge badge-secondary">{{object.owner.username}}</span></h4>
+                            <h4>Owner's Full name: <span class="badge badge-secondary">{{object.owner.first_name}} {{object.owner.last_name}}</span></h4>
+                            <h4>Description: <span class="badge badge-secondary">{{object.description}}</span></h4>
+                            {% if object.pk == request.user.pk %}
+                                <h4>Is Album Private: <span class="badge badge-secondary">{{object.is_private}}</span></h4>
+                            {% endif %}
+                            <h4>Creation Date: <span class="badge badge-secondary">{{object.creation_date}}</span></h4>
+                            {% if object.pk == request.user.pk %}
+                                <h4>Update Date: <span class="badge badge-secondary">{{object.update_date}}</span></h4>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Search in This Album</strong>
+                    <small>Enter a part of a description or a hashtag</small>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <input name="search" type="text" class="form-control" placeholder="">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Search</button>
+                    </form>
+                </div>
+            </div>
+            {% if object_list == None %}
+                <h2 class="text-sm-center mt-2 mb-1">Nothing Found</h2>
+            {% else %}
+                <div class="row">
+                    {% for each_object in object_list %}
+                        <div class="col-md-4">
+                            <a href="{% url 'album_detail' each_object.pk %}">
+                                <div class="card">
+                                    <img class="card-img-top" src="{{each_object.album_picture.url}}" height="200px" width="100px" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-3">{{each_object.name}}</h4>
+                                        <p class="card-text">Description: {{each_object.description}}</p>
+                                        <p class="card-text">Private: {{each_object.is_private}}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Pages</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body">
+                            <p class="card-text">You are currently in page 1</p>
+                        </div>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+{% endblock %}

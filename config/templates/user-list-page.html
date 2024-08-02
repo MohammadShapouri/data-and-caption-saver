@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_content %}
+        <div class="content mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Search</strong>
+                    <small>Enter a first name, a last name or a username</small>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <input name="search" type="text" class="form-control" placeholder="">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Search</button>
+                    </form>
+                </div>
+            </div>
+            {% if object_list == None %}
+                <h2 class="text-sm-center mt-2 mb-1">Nothing Found</h2>
+            {% else %}
+                <div class="animated fadeIn">
+                    <div class="column">
+                        {% for each_object in object_list%}
+                            <a href="{% url 'user_profile' each_object.pk %}">
+                                <div class="col-md-12">
+                                    <section class="card">
+                                        <div class="user-list-bg-color">
+                                            <div class="media" style="margin-top: 10px;">
+                                                {% if object.pk == request.user.pk %}
+                                                <img class="align-self-center rounded-circle mr-3" style="margin-left:10px; width:50px; height:50px;" src="{{object.profile_picture.url}}" alt="Card image cap">
+                                                {% else %}
+                                                    {% if object.is_private == False %}
+                                                        <img class="align-self-center rounded-circle mr-3" style="margin-left:10px; width:50px; height:50px;" src="{{object.profile_picture.url}}" alt="Card image cap">                                    
+                                                    {% else %}
+                                                        <img class="align-self-center rounded-circle mr-3" style="margin-left:10px; width:50px; height:50px;" src="{% static 'photos/account_photos/default/default_profile_pic.png' %}" alt="Card image cap">                                    
+                                                    {% endif %}
+                                                {% endif %}
+                                                <div class="media-body">
+                                                    <h5 class="text-white display-6">{{each_object.first_name}}</h5>
+                                                    <p class="text-light">{{each_object.username}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Pages</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body">
+                            <p class="card-text">You are currently in page 1</p>
+                        </div>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_content %}
+        <div class="content mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Search</strong>
+                    <small>Enter an album name or a part of an album description</small>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <input name="search" type="text" class="form-control" placeholder="">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Search</button>
+                    </form>
+                </div>
+            </div>
+            {% if object_list == None %}
+                <h2 class="text-sm-center mt-2 mb-1">Nothing Found</h2>
+            {% else %}
+                <div class="row">
+                    {% for each_object in object_list %}
+                        <div class="col-md-4">
+                            <a href="{% url 'album_detail' each_object.pk %}">
+                                <div class="card">
+                                    <img class="card-img-top" src="{{each_object.album_picture.url}}" height="200px" width="100px" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-3">{{each_object.name}}</h4>
+                                        <p class="card-text">Description: {{each_object.description}}</p>
+                                        <p class="card-text">Private: {{each_object.is_private}}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Pages</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body">
+                            <p class="card-text">You are currently in page 1</p>
+                        </div>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+{% endblock %}
